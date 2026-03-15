@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liyao.auth.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.liyao.auth.model.entity.User">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="userAccount" column="userAccount" jdbcType="VARCHAR"/>
+            <result property="userPassword" column="userPassword" jdbcType="VARCHAR"/>
+            <result property="userRole" column="userRole" jdbcType="VARCHAR"/>
+            <result property="accessKey" column="accessKey" jdbcType="VARCHAR"/>
+            <result property="secretKey" column="secretKey" jdbcType="VARCHAR"/>
+            <result property="userAvatar" column="userAvatar" jdbcType="VARCHAR"/>
+            <result property="userProfile" column="userProfile" jdbcType="VARCHAR"/>
+            <result property="unionId" column="unionId" jdbcType="VARCHAR"/>
+            <result property="mpOpenId" column="mpOpenId" jdbcType="VARCHAR"/>
+            <result property="userName" column="userName" jdbcType="VARCHAR"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,userAccount,userPassword,
+        userRole,accessKey,secretKey,
+        userAvatar,userProfile,unionId,
+        mpOpenId,userName,createTime,
+        updateTime,isDelete
+    </sql>
+
+  <!--  重置密码 -->
+  <update id="updateBatchValueByIds" parameterType="map">
+    UPDATE user
+    SET userPassword = #{value}
+    WHERE id IN
+    <foreach collection="ids" item="id" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </update>
+
+
+  <!-- 获取用户信息分页列表 -->
+  <select id="getUserPage" resultType="com.liyao.auth.model.vo.UserVO">
+    SELECT
+    userAccount,
+    userName,
+    userRole,
+    userAvatar,
+    userProfile,
+    createTime
+    FROM
+    user
+    <where>
+      <if test="queryParams.userAccount != null and queryParams.userAccount != ''">
+        AND userAccount LIKE CONCAT('%', #{queryParams.userAccount}, '%')
+      </if>
+      <if test="queryParams.userName != null and queryParams.userName != ''">
+        AND userName LIKE CONCAT('%', #{queryParams.userName}, '%')
+      </if>
+      <if test="queryParams.userRole != null and queryParams.userRole != ''">
+        AND userRole = #{queryParams.userRole}
+      </if>
+      <if test="queryParams.createTime != null">
+        AND createTime LIKE CONCAT('%', #{queryParams.createTime}, '%')
+      </if>
+    </where>
+  </select>
+
+</mapper>

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.github.liyao52033</groupId>
+    <artifactId>liyao-module-parent</artifactId>
+    <version>${revision}</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <artifactId>liyao-spring-boot3-starter-auth</artifactId>
+  <name>spring-boot3-auth</name>
+  <description>基于 Spring Boot 3 的认证组件，提供了用户认证、权限校验等功能，可以快速集成到 Spring Boot 3 项目中，简化认证和授权的开发工作。</description>
+  <url>https://github.com/liyao52033</url>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+
+
+    <!--
+    Spring Boot 配置注解处理器依赖
+    作用：在编译期生成配置元数据，用于支持自定义配置类的IDE自动提示和校验
+    参数说明：
+        - groupId: 所属组织ID（Spring Boot官方组件）
+        - artifactId: 组件标识（配置注解处理器）
+        - version: 版本号（继承自父POM的spring-boot.version属性）
+        - optional: 标记为可选依赖（true），避免该依赖被传递到其他模块
+    -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <!--
+    Spring Boot 自动配置核心依赖
+    作用：提供自动配置机制的基础支持，包含@EnableAutoConfiguration等核心注解
+    参数说明：
+        - groupId: 所属组织ID（Spring Boot官方组件）
+        - artifactId: 组件标识（自动配置模块）
+        - version: 版本号（继承自父POM的spring-boot.version属性）
+    注意：此依赖为Spring Boot应用自动配置功能的必要基础依赖
+    -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-autoconfigure</artifactId>
+    </dependency>
+
+
+    <!-- lombok注解 -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.24</version>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>io.github.liyao52033</groupId>
+      <artifactId>liyao-spring-boot3-starter-ErrorCode</artifactId>
+      <version>1.2.0</version>
+    </dependency>
+
+
+    <!-- hutool工具类 -->
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+    </dependency>
+
+    <!-- MapStruct 对象映射 -->
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct-processor</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.baomidou</groupId>
+      <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+      <version>3.5.11</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.jetbrains</groupId>
+        <artifactId>annotations</artifactId>
+        <version>13.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjweaver</artifactId>
+      <version>1.9.23</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.swagger.core.v3</groupId>
+      <artifactId>swagger-annotations</artifactId>
+      <version>2.2.19</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>2.0.57</version>
+    </dependency>
+
+  </dependencies>
+
+  <!--  https://www.cnblogs.com/jonath/p/7729903.html -->
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.9.0</version>
+        <configuration>
+          <release>17</release>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+        <configuration>
+          <flattenMode>ossrh</flattenMode>
+        </configuration>
+        <executions>
+          <execution>
+            <id>flatten</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>flatten</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>flatten.clean</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <publishingServerId>DF7AE9A66CA4D87FB89FEB9D662018C5E76E1732</publishingServerId>
+          <checksums>required</checksums>
+          <deploymentName>liyao52033</deploymentName>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>io.github.liyao52033</groupId>
+        <artifactId>autofill-javadoc-maven-plugin</artifactId>
+        <version>1.3.0</version>
+        <executions>
+          <execution>
+            <id>autofill-javadoc</id>
+            <phase>generate-sources</phase> <!-- 确保在javadoc之前运行 -->
+            <goals>
+              <goal>autofill</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <sourceDir>src/main/java</sourceDir> <!-- 指定源代码目录 -->
+          <enableAi>true</enableAi>
+          <aiApiKey>sk-98d9a5020d08fa25e26137591c79cc696ae1ffbec0a6be4ffef3af9dbcfb23b8</aiApiKey>
+          <aiApiUrl>http://154.8.161.139:8080</aiApiUrl>
+          <aiModel>glm-5</aiModel>
+          <skipExistingJavadoc>false</skipExistingJavadoc>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <phase>verify</phase> <!-- Javadoc 生成在 verify 阶段运行 -->
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <gpgArguments>
+            <arg>--pinentry-mode</arg>
+            <arg>loopback</arg>
+          </gpgArguments>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
