@@ -207,7 +207,6 @@
         <configuration>
           <sourceDir>src/main/java</sourceDir> <!-- 指定源代码目录 -->
           <enableAi>true</enableAi>
-          <aiApiKey>sk-98d9a5020d08fa25e26137591c79cc696ae1ffbec0a6be4ffef3af9dbcfb23b8</aiApiKey>
           <aiApiUrl>http://154.8.161.139:8080</aiApiUrl>
           <aiModel>glm-5</aiModel>
           <skipExistingJavadoc>false</skipExistingJavadoc>
