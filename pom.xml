@@ -206,10 +206,6 @@
         </executions>
         <configuration>
           <sourceDir>src/main/java</sourceDir> <!-- 指定源代码目录 -->
-          <enableAi>true</enableAi>
-          <aiApiUrl>http://154.8.161.139:8080</aiApiUrl>
-          <aiModel>glm-5</aiModel>
-          <skipExistingJavadoc>false</skipExistingJavadoc>
         </configuration>
       </plugin>
       <plugin>

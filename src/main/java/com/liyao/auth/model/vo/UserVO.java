@@ -5,7 +5,6 @@ import com.liyao.auth.model.entity.User;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
@@ -71,7 +70,7 @@ public class UserVO implements Serializable {
      * 将 VO 对象转换为实体对象
      *
      * @param userVO 用户 VO 对象
-     * @return 返回用户实体对象
+     * @return 返回值类型为 User 的描述
      */
     public static User voToObj(UserVO userVO) {
         if (userVO == null) {
@@ -86,7 +85,7 @@ public class UserVO implements Serializable {
      * 将实体对象转换为 VO 对象
      *
      * @param user 用户实体对象
-     * @return 返回用户 VO 对象
+     * @return 返回值类型为 UserVO 的描述
      */
     public static UserVO objToVo(User user) {
         if (user == null) {

@@ -55,7 +55,7 @@ public class SysUserServiceImpl extends ServiceImpl<UserMapper, User> implements
      * @param userAccount 用户账号
      * @param userPassword 用户密码
      * @param checkPassword 确认密码
-     * @return 返回新用户 ID
+     * @return 返回整数值
      */
     @Override
     public long userRegister(String userAccount, String userPassword, String checkPassword) {
@@ -104,7 +104,7 @@ public class SysUserServiceImpl extends ServiceImpl<UserMapper, User> implements
      * 更新用户密码
      *
      * @param userUpdatePassword 密码更新请求参数
-     * @return 返回更新后的用户 ID
+     * @return 返回整数值
      */
     @Override
     public long updateUserPassword(UserUpdatePassword userUpdatePassword) {
@@ -155,7 +155,7 @@ public class SysUserServiceImpl extends ServiceImpl<UserMapper, User> implements
      * @param userAccount 用户账号
      * @param userPassword 用户密码
      * @param request HTTP 请求对象
-     * @return 返回登录用户信息 VO
+     * @return 返回值类型为 LoginUserVO 的描述
      */
     @Override
     public LoginUserVO userLogin(String userAccount, String userPassword, HttpServletRequest request) {
@@ -196,7 +196,7 @@ public class SysUserServiceImpl extends ServiceImpl<UserMapper, User> implements
      * 获取当前登录用户信息
      *
      * @param request HTTP 请求对象
-     * @return 返回当前登录用户实体
+     * @return 返回值类型为 User 的描述
      */
     @Override
     public User getLoginUser(HttpServletRequest request) {
@@ -223,7 +223,7 @@ public class SysUserServiceImpl extends ServiceImpl<UserMapper, User> implements
      * 获取当前登录用户信息（允许为 null）
      *
      * @param request HTTP 请求对象
-     * @return 返回当前登录用户实体，未登录则返回 null
+     * @return 返回值类型为 User 的描述
      */
     @Override
     public User getLoginUserPermitNull(HttpServletRequest request) {
@@ -246,7 +246,7 @@ public class SysUserServiceImpl extends ServiceImpl<UserMapper, User> implements
      * 判断用户是否已登录
      *
      * @param request HTTP 请求对象
-     * @return 返回布尔值，true 表示已登录，false 表示未登录
+     * @return 返回布尔值，true 或 false
      */
     @Override
     public Boolean isLogin(HttpServletRequest request) {
@@ -270,7 +270,7 @@ public class SysUserServiceImpl extends ServiceImpl<UserMapper, User> implements
      * 判断当前用户是否为管理员
      *
      * @param request HTTP 请求对象
-     * @return 返回布尔值，true 表示是管理员，false 表示不是管理员
+     * @return 返回布尔值，true 或 false
      */
     @Override
     public boolean isAdmin(HttpServletRequest request) {
@@ -288,7 +288,7 @@ public class SysUserServiceImpl extends ServiceImpl<UserMapper, User> implements
      * 判断指定用户是否为管理员
      *
      * @param user 用户实体
-     * @return 返回布尔值，true 表示是管理员，false 表示不是管理员
+     * @return 返回布尔值，true 或 false
      */
     @Override
     public boolean isAdmin(User user) {
@@ -300,7 +300,7 @@ public class SysUserServiceImpl extends ServiceImpl<UserMapper, User> implements
      * 用户登出
      *
      * @param request HTTP 请求对象
-     * @return 返回布尔值，true 表示登出成功
+     * @return 返回布尔值，true 或 false
      */
     @Override
     public boolean userLogout(HttpServletRequest request) {
@@ -313,7 +313,7 @@ public class SysUserServiceImpl extends ServiceImpl<UserMapper, User> implements
      * 转换为登录用户 VO
      *
      * @param user 用户实体
-     * @return 返回登录用户 VO 对象
+     * @return 返回值类型为 LoginUserVO 的描述
      */
     @Override
     public LoginUserVO getLoginUserVO(User user) {
@@ -332,7 +332,7 @@ public class SysUserServiceImpl extends ServiceImpl<UserMapper, User> implements
      * 转换为用户 VO
      *
      * @param user 用户实体
-     * @return 返回用户 VO 对象
+     * @return 返回值类型为 UserVO 的描述
      */
     @Override
     public UserVO getUserVO(User user) {
@@ -347,7 +347,7 @@ public class SysUserServiceImpl extends ServiceImpl<UserMapper, User> implements
      * 批量转换为用户 VO 列表
      *
      * @param userList 用户实体列表
-     * @return 返回用户 VO 列表
+     * @return 返回列表数据，类型为 List(UserVO)
      */
     @Override
     public List<UserVO> getUserVO(List<User> userList) {
@@ -363,7 +363,7 @@ public class SysUserServiceImpl extends ServiceImpl<UserMapper, User> implements
      *
      * @param userPage 用户分页数据
      * @param request HTTP 请求对象
-     * @return 返回用户 VO 分页对象
+     * @return 返回值类型为 Page(UserVO) 的描述
      */
     @Override
     public Page<UserVO> getUserVOPage(Page<User> userPage, HttpServletRequest request) {
@@ -386,7 +386,7 @@ public class SysUserServiceImpl extends ServiceImpl<UserMapper, User> implements
      * 构建查询条件
      *
      * @param userQueryRequest 用户查询请求参数
-     * @return 返回 MyBatis Plus 查询条件对象
+     * @return 返回值类型为 QueryWrapper(User) 的描述
      */
     @Override
     public QueryWrapper<User> getQueryWrapper(UserQueryRequest userQueryRequest) {
@@ -423,7 +423,7 @@ public class SysUserServiceImpl extends ServiceImpl<UserMapper, User> implements
      * 批量删除用户
      *
      * @param ids 用户 ID 列表，多个 ID 用英文逗号分隔
-     * @return 返回布尔值，true 表示删除成功
+     * @return 返回布尔值，true 或 false
      */
     @Override
     public boolean deleteUsers(String ids) {
@@ -439,7 +439,7 @@ public class SysUserServiceImpl extends ServiceImpl<UserMapper, User> implements
      *
      * @param ids 用户 ID 列表
      * @param value 要更新的值
-     * @return 返回更新后的值
+     * @return 返回字符串
      */
     @Override
     public String updateBatchValue(List<Long> ids, String value) {

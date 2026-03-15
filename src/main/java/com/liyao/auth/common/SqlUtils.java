@@ -17,7 +17,7 @@ public class SqlUtils {
      * 合法的排序字段不能包含特殊字符如 =、(、)、空格等
      *
      * @param sortField 排序字段
-     * @return 返回布尔值，true 表示合法，false 表示不合法
+     * @return 返回布尔值，true 或 false
      */
     public static boolean validSortField(String sortField) {
         if (StringUtils.isBlank(sortField)) {

@@ -32,8 +32,8 @@ public class AuthInterceptor {
      *
      * @param joinPoint 连接点对象
      * @param authCheck 权限校验注解
-     * @return 返回方法执行结果
      * @throws Throwable 可能抛出的异常
+     * @return 返回值类型为 Object 的描述
      */
     @Around("@annotation(authCheck)")
     public Object doInterceptor(ProceedingJoinPoint joinPoint, AuthCheck authCheck) throws Throwable {

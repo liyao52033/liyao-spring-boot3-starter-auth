@@ -26,7 +26,7 @@ public class AuthAutoConfiguration {
      * 使用@ConditionalOnProperty 注解确保只有在配置文件中启用了 liyao.auth.enabled 属性时才创建
      *
      * @param loginProperties 登录配置属性，用于初始化 LoginFilter 的允许访问路径
-     * @return 返回 LoginFilter 实例
+     * @return 返回值类型为 LoginFilter 的描述
      */
     @Bean
     @ConditionalOnProperty(prefix = "liyao.auth", value = "enabled")
